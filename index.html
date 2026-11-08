@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Phish n’ Release</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root,body[data-t=d]{--bg:#05070d;--fg:#fff;--mut:#8b95a9;--card:#0f1626;--line:#1f2b45;--bl:#2f8bff;--th:#232938;--out:#000}
+body[data-t=l]{--bg:#fff;--fg:#0a0d14;--mut:#6a7388;--card:#f1f4fa;--line:#dde3ef;--th:#e9ebf0;--out:#dfe3ea}
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+body{background:var(--out);font-family:'Sora',system-ui,-apple-system,sans-serif;color:var(--fg);display:grid;place-items:center;height:100dvh;transition:background .4s}
+#phone{position:relative;width:min(100vw,430px);height:min(100dvh,900px);background:radial-gradient(120% 45% at 50% 0,rgba(47,139,255,.18),transparent 70%),var(--bg);display:flex;flex-direction:column;overflow:hidden;font-size:17px;transition:background .4s}
+@media(min-width:500px){#phone{border-radius:46px;border:8px solid #1a1f2b;box-shadow:0 0 70px rgba(47,139,255,.35)}}
+#st{display:flex;justify-content:space-between;align-items:center;padding:12px 22px 4px;font-weight:600;font-size:15px}
+#theme{background:var(--card);border:1px solid var(--line);color:var(--fg);width:38px;height:38px;border-radius:50%;display:grid;place-items:center}
+svg.i{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+#screen{flex:1;overflow:auto;display:flex;flex-direction:column;min-height:0;animation:in .45s ease both}
+@keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;transition:transform .2s,background .3s,opacity .3s}
+button:active{transform:scale(.95)}
+.btn{background:var(--bl);color:#fff;padding:17px 28px;border-radius:18px;font-weight:600;box-shadow:0 0 26px rgba(47,139,255,.5);width:100%}
+.btn.gh{background:var(--card);color:var(--fg);box-shadow:none;border:1px solid var(--line)}
+.btn[disabled]{opacity:.35;box-shadow:none}
+.c{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 28px;gap:16px;text-align:center}
+h1{font-size:34px;letter-spacing:-.5px;text-shadow:0 0 24px rgba(47,139,255,.6)}
+h2{font-size:24px;margin:6px 0}
+.mut,.sub{color:var(--mut)}.sm{font-size:14px}
+a{color:var(--bl);text-decoration:underline;cursor:pointer}
+.fishw svg{width:240px;color:var(--fg);filter:drop-shadow(0 0 24px var(--bl));animation:sw 4s ease-in-out infinite}
+@keyframes sw{0%,100%{transform:translate(-10px,0) rotate(-4deg)}50%{transform:translate(10px,-14px) rotate(4deg)}}
+.tl{transform-origin:150px 70px;animation:wg 1.6s ease-in-out infinite}@keyframes wg{50%{transform:rotate(14deg)}}
+.agree{display:flex;gap:10px;align-items:center;font-size:15px}
+.agree input{width:22px;height:22px;accent-color:var(--bl)}
+.pd{padding:4px 20px 24px;display:flex;flex-direction:column;gap:14px}
+.h1{font-size:34px;font-weight:700;padding:10px 20px 8px}
+.row{display:flex;align-items:center;gap:14px;padding:18px;background:var(--card);border:1px solid var(--line);border-radius:20px;text-align:left}
+.row b,.row>div:nth-child(2){flex:1}
+.sw{width:58px;height:34px;border-radius:99px;background:var(--line);position:relative;transition:.3s;flex:none;cursor:pointer}
+.sw i{position:absolute;top:3px;left:3px;width:28px;height:28px;border-radius:50%;background:#fff;transition:.3s}
+.sw.on{background:var(--bl);box-shadow:0 0 16px rgba(47,139,255,.6)}.sw.on i{transform:translateX(24px)}
+.app{width:52px;height:52px;border-radius:15px;display:grid;place-items:center;color:#fff;flex:none}
+.app svg{width:28px;height:28px}.app.g{background:linear-gradient(#5bf075,#1fbf3f)}.app.b{background:linear-gradient(#4fa8ff,#2f5bff)}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:16px;width:100%}
+.tile{display:flex;flex-direction:column;align-items:center;gap:12px;padding:28px 10px;background:var(--card);border:1px solid var(--line);border-radius:26px;font-weight:600}
+.tile .app{width:76px;height:76px;border-radius:22px}.tile .app svg{width:40px;height:40px}
+.trust{text-align:left;font-size:15px;color:var(--mut);display:flex;flex-direction:column;gap:8px;padding:0 6px}
+.pins{display:flex;gap:22px;justify-content:center;padding:6px 20px 16px}
+.pin{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:14px}
+.av{width:54px;height:54px;border-radius:50%;background:linear-gradient(160deg,#6aa7ff,#2f4fd8);color:#fff;display:grid;place-items:center;font-weight:600;flex:none}
+.pin .av{width:72px;height:72px;font-size:26px}.av.s{width:38px;height:38px;font-size:15px}
+.rw{display:flex;gap:14px;padding:12px 20px;align-items:center;border-top:1px solid var(--line);cursor:pointer}
+.rw>div:last-child{min-width:0;flex:1}
+.nm{display:flex;justify-content:space-between;font-weight:600}.nm small{color:var(--mut);font-weight:400;font-size:13px}
+.pv{color:var(--mut);font-size:15px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.thh{display:flex;justify-content:space-between;align-items:center;padding:6px 14px}
+.who{display:flex;flex-direction:column;align-items:center;font-size:13px;gap:2px}
+.ib2{padding:8px;border-radius:99px;display:flex;align-items:center;gap:6px;min-width:44px;justify-content:center}
+.ck{border:1px solid var(--bl);color:var(--bl);padding:8px 14px;font-size:14px;font-weight:600}.ck.on{background:var(--bl);color:#fff;box-shadow:0 0 18px rgba(47,139,255,.6)}
+.ms{flex:1;overflow:auto;display:flex;flex-direction:column;padding:10px 14px;min-height:0}
+.b{max-width:80%;padding:10px 15px;border-radius:22px;line-height:1.35;margin:3px 0;animation:in .3s both}
+.b.th{background:var(--th);align-self:flex-start;border-bottom-left-radius:6px}
+.b.me{background:var(--bl);color:#fff;align-self:flex-end;border-bottom-right-radius:6px}
+.lnk{color:var(--bl);text-decoration:underline;cursor:pointer;word-break:break-all}
+.comp{margin:8px 14px 16px;border:1px solid var(--line);border-radius:24px;padding:11px 18px;color:var(--mut)}
+.pn{margin:2px 14px 6px;padding:16px;background:var(--card);border:1px solid var(--line);border-radius:22px;display:flex;flex-direction:column;gap:10px;animation:in .35s both}
+.chip{align-self:flex-start;padding:5px 13px;border-radius:99px;font-size:13px;font-weight:700;color:var(--c);border:1px solid var(--c);background:color-mix(in srgb,var(--c) 14%,transparent)}
+.acts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.acts button{padding:11px 4px;border-radius:14px;background:var(--bg);border:1px solid var(--line);font-size:14px}
+.acts .w{grid-column:1/4;color:#ff4d5e;border-color:#ff4d5e55}
+.em{padding:12px 22px;display:flex;flex-direction:column;gap:12px;overflow:auto;flex:1;line-height:1.45}.em h3{font-size:22px}
+#tabs{display:flex;border-top:1px solid var(--line);padding:8px 8px 14px}
+#tabs button{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:12px;color:var(--mut)}#tabs .on{color:var(--bl)}
+#sheet{position:absolute;inset:0;background:rgba(0,0,0,.55);display:none;align-items:flex-end;z-index:9}#sheet.on{display:flex;animation:fd .25s}
+.sh{width:100%;max-height:90%;overflow:auto;background:var(--card);border-radius:28px 28px 0 0;padding:20px 22px 30px;border-top:1px solid var(--bl);box-shadow:0 -10px 40px rgba(47,139,255,.3);animation:up .35s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column;gap:12px}
+@keyframes up{from{transform:translateY(100%)}}@keyframes fd{from{opacity:0}}
+.tag{font-family:ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:2px;color:var(--bl)}
+.q{padding:14px;border-radius:16px;border-left:4px solid #ff4d5e;background:var(--bg);font-weight:600}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pg{display:flex;align-items:center;gap:18px}
+.ring{width:150px;height:150px;border-radius:50%;background:conic-gradient(var(--bl) calc(var(--p)*1%),var(--line) 0);display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;flex:none;filter:drop-shadow(0 0 14px rgba(47,139,255,.5))}
+.ring::before{content:'';position:absolute;inset:12px;border-radius:50%;background:var(--bg)}.ring>*{position:relative}.ring b{font-size:34px}.ring small{color:var(--mut)}
+.st3{display:flex;flex-direction:column;gap:8px;color:var(--mut);font-size:14px}.st3 b{color:var(--fg);font-size:20px;margin-right:8px}
+.sec{font-weight:700;font-size:20px;margin-top:6px}
+.tlw{border-left:2px solid var(--line);margin-left:8px;padding-left:20px}
+.ev{display:flex;align-items:center;gap:10px;padding:10px 0;position:relative}.ev>div{flex:1}
+.ev i{position:absolute;left:-28px;width:14px;height:14px;border-radius:50%;background:var(--bl);box-shadow:0 0 12px var(--bl)}
+.pill{padding:8px 14px;border-radius:99px;border:1px solid var(--bl);color:var(--bl);font-size:14px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}.chips span{padding:8px 14px;border-radius:99px;background:var(--card);border:1px solid var(--line);font-size:14px}
+.opt{padding:14px;border-radius:16px;border:1px solid var(--line);background:var(--bg);text-align:left}
+.opt.ok{border-color:#2ee59d;background:#2ee59d22}.opt.no{border-color:#ff4d5e;background:#ff4d5e22}
+input[type=text],input:not([type]){width:100%;padding:13px;border-radius:14px;border:1px solid var(--line);background:var(--bg);color:var(--fg);font:inherit;font-size:15px}
+#toast{position:absolute;left:20px;right:20px;bottom:90px;padding:14px 18px;border-radius:16px;background:var(--fg);color:var(--bg);font-size:15px;font-weight:600;opacity:0;transform:translateY(12px);transition:.35s;pointer-events:none;z-index:10;text-align:center}#toast.on{opacity:1;transform:none}
+</style>
+</head>
+<body data-t="d">
+<div id="phone">
+  <div id="st"><span>9:41</span><button id="theme" aria-label="Toggle light or dark mode" onclick="S.dark=!S.dark;R(0)"></button></div>
+  <div id="screen"></div>
+  <div id="tabs"></div>
+  <div id="sheet" onclick="if(event.target===this)X()"></div>
+  <div id="toast"></div>
+</div>
+<script>
+const $=s=>document.querySelector(s);
+const P={shield:'<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/>',back:'<path d="M15 5l-7 7 7 7"/>',sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/>',moon:'<path d="M20 14A8 8 0 1110 4a7 7 0 0010 10z"/>',msg:'<path d="M4 5h16v11H9l-5 4z"/>',mail:'<rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 8l9 6 9-6"/>',chart:'<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',lock:'<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/>'};
+const ic=n=>`<svg class="i" viewBox="0 0 24 24">${P[n]}</svg>`;
+const fish=`<svg viewBox="0 0 200 140"><g fill="currentColor"><path class="tl" d="M150 70Q185 40 195 22Q184 70 195 118Q185 100 150 70Z"/><ellipse cx="85" cy="70" rx="68" ry="46"/><path d="M68 28Q90 4 115 30Z" opacity=".7"/><path d="M85 92Q95 120 112 100Z" opacity=".7"/></g><circle cx="46" cy="62" r="6" fill="#05070d"/><path d="M100 50Q114 70 100 92" stroke="#2f8bff" stroke-width="5" fill="none" stroke-linecap="round"/></svg>`;
+const LV={scam:['Likely scam','#ff4d5e'],sus:['Suspicious','#ffb020'],unsure:['Not sure','#8ab4ff'],safe:['Looks safe','#2ee59d']};
+const LS={
+'Carrier impersonation':{f:'“Pay within 1 hour” and a link ending in .support-secure.co',r:'Real carrier links end in the carrier’s own .com. A countdown is a pressure tactic.',tips:['Check your bill in the official app, never through a text link.','Real carriers don’t threaten shutoff within an hour.','Look at the end of the link: does it match the real company?'],q:'T-Mobile: Your line is suspended. Restore it now: https://tmobile.restore-line.example',o:['Tap the link quickly','Open the T-Mobile app instead','Reply with your PIN'],a:1,w:'The official app is the safe route. That link is not t-mobile.com.'},
+'Package delivery':{f:'A $1.45 “redelivery fee” and a link ending in .top',r:'Carriers rarely charge fees by text. Track packages on the carrier’s own site.',tips:['You can’t be asked to pay to receive a package you ordered.','Track with the number in your order email, not the text.','Unexpected package texts from unknown senders are a classic hook.'],q:'Your parcel is held. Pay a $2 fee to reschedule: https://parcel-fix.example',o:['Pay the small fee','Check the order in the store’s app','Forward it to friends'],a:1,w:'Small fees are the bait. Verify in the official order page.'},
+'Bank alert':{f:'The link goes to chase-secure-verify.com, not chase.com',r:'Banks never ask you to log in through a texted link. Call the number on your card.',tips:['Never log in from a link in a text.','Call the number printed on your card.','Fear of a big charge is meant to make you rush.'],q:'Bank Alert: $842 charge. Not you? Verify: https://bank-secure-check.example',o:['Tap and log in fast','Call the number on the back of your card','Reply with your card number'],a:1,w:'Always use a number you already trust.'},
+'Prize or gift card':{f:'You “won” something you never entered',r:'Real prizes never ask for a click or a fee within 24 hours.',tips:['If you didn’t enter, you didn’t win.','Gift cards are a payment scammers love.','Urgent deadlines are pressure, not a prize.'],q:'You won a $500 gift card! Claim in 24h: https://prize-claim.example',o:['Claim it right away','Ignore and delete','Share with a friend first'],a:1,w:'No entry means no prize. Delete it.'},
+'Fake job offer':{f:'$45/hr with no experience, applied for by text',r:'Real employers don’t text first. Never pay for training or equipment.',tips:['Unrealistic pay for easy work is a red flag.','Research the company on its real site.','Never send money or ID to get hired.'],q:'Hiring! $45/hr remote, no experience. Apply: https://quick-hire.example',o:['Apply with my details','Search the company independently','Send a deposit for equipment'],a:1,w:'Verify the employer yourself before sharing anything.'},
+'Account locked':{f:'“Within 24 hours” and a link that isn’t on the real company’s site',r:'Open the company’s app or type its address yourself.',tips:['Real companies don’t demand your password.','Check the sender’s address, not just the name.','A deadline is a pressure tactic.'],q:'Your account will be limited. Confirm your password within 24 hours: https://account-check.example',o:['Click and sign in','Open the official site by typing it','Reply with the password'],a:1,w:'Go to the site yourself; never use the email’s link.'}};
+const T=[
+{id:'mom',k:'sms',n:'Mom',av:'M',t:'9:12 AM',pin:1,lvl:'safe',why:'From a saved contact, no links, no requests for money or codes.',m:[['th','Good morning sweetheart! Did you eat breakfast today?'],['me','Yes mom, eggs and toast 😄'],['th','Good. And what are you having for dinner?'],['me','Maybe pasta, I’ll see'],['th','Don’t forget Sunday lunch, I’m making your favorite ❤️']]},
+{id:'alex',k:'sms',n:'Alex',av:'A',t:'8:40 AM',pin:1,lvl:'safe',why:'Saved contact chatting normally. Nothing unusual.',m:[['th','yo did you see the game last night 😭'],['me','lol no I fell asleep'],['th','bro you missed so much. pizza Saturday?'],['me','yes!! 🍕']]},
+{id:'tmo',k:'sms',n:'T-Mobile',av:'T',t:'10:24 AM',cat:'Carrier impersonation',lvl:'scam',why:'Urgent language, plus a link that doesn’t match the real company.',m:[['th','T-Mobile: Your bill is 2 days overdue. Pay within 1 hour to avoid service suspension: https://t-mobile-billpay.support-secure.co']]},
+{id:'amz',k:'sms',n:'Amazon',av:'A',t:'9:15 AM',lvl:'safe',why:'Link goes to amazon.com, matching the sender. No payment demanded.',m:[['th','Amazon: Your order #112-8830214 has shipped. Track it: https://www.amazon.com/progress-tracker']]},
+{id:'usps',k:'sms',n:'+1 (917) 555-0188',av:'#',t:'Yesterday',cat:'Package delivery',lvl:'scam',why:'Unknown sender, a small “fee”, and a link ending in .top.',m:[['th','USPS: Your package could not be delivered. Confirm your address and pay a $1.45 fee: https://usps-redelivery.track-parcel.top']]},
+{id:'cvs',k:'sms',n:'CVS Pharmacy',av:'C',t:'Yesterday',lvl:'safe',why:'Looks urgent but is real: official cvs.com link, no payment or threats.',m:[['th','CVS Pharmacy: Your prescription is ready for pickup at 120 Main St. Details: https://www.cvs.com/refill']]},
+{id:'chs',k:'sms',n:'Chase Alert',av:'C',t:'Yesterday',cat:'Bank alert',lvl:'scam',why:'Fear of a charge, plus a link to chase-secure-verify.com, not chase.com.',m:[['th','Chase Alert: Suspicious $842.19 charge on your card. If this wasn’t you, verify now: https://chase-secure-verify.com/login']]},
+{id:'chr',k:'sms',n:'+1 (469) 555-0142',av:'#',t:'Tue',lvl:'unsure',why:'No link and no request for money, but I can’t confirm who this is.',how:'Ask Jess directly, ask something only Chris would know, and never send money first.',m:[['th','Hi, it’s Chris! Got your number from Jess. Are you still selling the bike?']]},
+{id:'ggl',k:'sms',n:'Google',av:'G',t:'Tue',lvl:'safe',why:'Login codes are normal when you just signed in. Never share the code with anyone.',m:[['th','G-482913 is your Google verification code. Don’t share it with anyone.']]},
+{id:'prz',k:'sms',n:'+1 (214) 555-0171',av:'#',t:'Mon',cat:'Prize or gift card',lvl:'sus',why:'A prize you never entered, with a 24-hour deadline.',m:[['th','Congrats! You won a $500 Walmart gift card. Claim in 24h: https://walmart-rewards.claim-now.win']]},
+{id:'job',k:'sms',n:'+1 (972) 555-0119',av:'#',t:'Mon',cat:'Fake job offer',lvl:'sus',why:'Very high pay for no experience, from a sender who texted first.',m:[['th','Hiring: Remote assistant $45/hr, no experience needed. Apply: https://quick-hire-jobs.work/apply']]},
+{id:'e1',k:'mail',n:'PayPal Security',f:'billing@paypal-review.example',av:'P',t:'9:38 AM',s:'Your account will be limited',cat:'Account locked',lvl:'scam',why:'Sender isn’t paypal.com, it demands a password in 24 hours, and the link goes elsewhere.',b:'We noticed unusual activity. Confirm your password within 24 hours to avoid limits: https://paypal-check.example/login'},
+{id:'e2',k:'mail',n:'Spotify',f:'no-reply@spotify.com',av:'S',t:'Yesterday',s:'Your receipt from Spotify',lvl:'safe',why:'Sender and link both match spotify.com. Nothing urgent is asked.',b:'Thanks for subscribing. Your monthly receipt is ready. Manage your plan: https://www.spotify.com/account'},
+{id:'e3',k:'mail',n:'IT Helpdesk',f:'it-support@helpdesk-portal.example',av:'I',t:'Mon',s:'Password expires today',cat:'Account locked',lvl:'sus',why:'Generic sender and a deadline pushing you to sign in through a link.',b:'Your password expires in 24 hours. Keep your access by signing in here: https://helpdesk-it.portal-login.example'}];
+const T0=Date.now(),D={log:[{cat:'Package delivery',d:T0-2*864e5}],spot:4,streak:3,learned:[],key:''};
+let mem={};const ld=()=>{try{return JSON.parse(localStorage.getItem('pnr'))}catch(e){return mem.p}};
+const S=Object.assign({sc:'splash',tab:'msg',open:null,sms:true,mail:false,agree:true,chk:{},dark:true},D,ld()||{});
+const save=()=>{const v={log:S.log,spot:S.spot,streak:S.streak,learned:S.learned,key:S.key};mem.p=v;try{localStorage.setItem('pnr',JSON.stringify(v))}catch(e){}};
+const cur=()=>T.find(x=>x.id===S.open);
+const lk=(t,p)=>t.replace(/https?:\/\/\S+/g,u=>`<span class="lnk" onclick="lc('${u}'${p?',1':''})">${u}</span>`);
+const ago=d=>{const n=Math.floor((Date.now()-d)/864e5);return n<1?'Today':n===1?'Yesterday':n+' days ago'};
+const tt=m=>{const e=$('#toast');e.textContent=m;e.classList.add('on');clearTimeout(tt.t);tt.t=setTimeout(()=>e.classList.remove('on'),2600)};
+const sheet=h=>{$('#sheet').innerHTML=h;$('#sheet').classList.add('on')};
+const X=()=>{$('#sheet').classList.remove('on');if(S.sc==='app'&&!S.open)R(0)};
+const go=s=>{S.sc=s;R()};
+const openApp=t=>{S.tab=t;S.open=null;go('app')};
+const op=id=>{S.open=id;R()};const cl=()=>{S.open=null;R()};
+const ck=()=>{const i=S.open;S.chk[i]=!S.chk[i];R(0)};
+function tg(k,el){S[k]=!S[k];el.classList.toggle('on');const g=$('#go');if(g)g.disabled=!(S.sms||S.mail);if(S.sc==='app')$('#tabs').innerHTML=tabs()}
+const tog=(k,l,ico,cls)=>`<div class="row"><div class="app ${cls}">${ic(ico)}</div><b>${l}</b><div class="sw ${S[k]?'on':''}" onclick="tg('${k}',this)"><i></i></div></div>`;
+const V={
+splash:()=>`<div class="c"><div class="fishw">${fish}</div><h1>Phish n’ Release</h1><p class="sub">Don’t take the bait.</p><label class="agree"><input type="checkbox" ${S.agree?'checked':''} onchange="S.agree=this.checked;$('#go').disabled=!S.agree"> <span>I agree to the <a onclick="event.preventDefault();terms()">Terms &amp; Conditions</a></span></label><button id="go" class="btn" ${S.agree?'':'disabled'} onclick="go('perm')">Get Started</button></div>`,
+perm:()=>`<div class="c" style="justify-content:flex-start;padding-top:30px"><h1 style="font-size:30px">You choose what we check</h1><p class="sub">Pick where we can help. Switch them off any time.</p><div class="pd" style="width:100%;padding:8px 0">${tog('sms','Messages','msg','g')}${tog('mail','Mail','mail','b')}</div><div class="trust"><span>✓ Nothing is scanned until you tap “Check”</span><span>✓ Phone numbers and names are hidden first</span><span>✓ Nothing is stored. History stays on this phone</span></div><div style="flex:1"></div><button id="go" class="btn" ${S.sms||S.mail?'':'disabled'} onclick="go('choose')">Continue</button><a class="sm" onclick="terms()">Read the Terms &amp; Conditions</a></div>`,
+choose:()=>`<div class="c"><h1 style="font-size:28px">Which app do you want to open?</h1><div class="tiles">${S.sms?`<button class="tile" onclick="openApp('msg')"><div class="app g">${ic('msg')}</div>Messages</button>`:''}${S.mail?`<button class="tile" onclick="openApp('mail')"><div class="app b">${ic('mail')}</div>Mail</button>`:''}</div></div>`,
+app:()=>S.open?thread():({msg:msgs,mail:mails,prog,priv})[S.tab]()};
+function msgs(){const L=T.filter(x=>x.k==='sms');return `<div class="h1">Messages</div><div class="pins">${L.filter(x=>x.pin).map(x=>`<div class="pin" onclick="op('${x.id}')"><div class="av">${x.av}</div>${x.n}</div>`).join('')}</div>${L.filter(x=>!x.pin).map(row).join('')}`}
+function mails(){return `<div class="h1">Mail</div>${T.filter(x=>x.k==='mail').map(row).join('')}`}
+const row=x=>`<div class="rw" onclick="op('${x.id}')"><div class="av">${x.av}</div><div><div class="nm"><span>${x.n}</span><small>${x.t}</small></div><div class="pv">${x.k==='mail'?'<b>'+x.s+'</b> · '+x.b:x.m[x.m.length-1][1]}</div></div></div>`;
+function panel(it){const L=LV[it.lvl],bad=it.lvl==='scam'||it.lvl==='sus';return `<div class="pn"><span class="chip" style="--c:${L[1]}">${L[0]}</span><div>${it.why}</div>${it.how?`<div class="mut"><b>How to check:</b> ${it.how}</div>`:''}${bad?`<div class="acts"><button onclick="tt('Good call. Just delete it.')">Don’t click</button><button onclick="rep()">Report</button><button onclick="tt('Sender blocked (demo)')">Block</button><button class="w" onclick="clicked()">I already clicked</button></div>`:''}</div>`}
+function thread(){const it=cur(),on=S.chk[it.id];return `<div class="thh"><button class="ib2" onclick="cl()">${ic('back')}</button><div class="who"><div class="av s">${it.av}</div>${it.n}</div><button class="ib2 ck ${on?'on':''}" onclick="ck()" aria-label="Check this message">${ic('shield')}<span>Check</span></button></div>${on?panel(it):''}`+(it.k==='mail'?`<div class="em"><h3>${it.s}</h3><div class="mut sm">From ${it.n} &lt;${it.f}&gt;</div><p>${lk(it.b)}</p></div>`:`<div class="ms">${it.m.map(([w,t])=>`<div class="b ${w}">${lk(t)}</div>`).join('')}</div><div class="comp">iMessage</div>`)}
+const rep=()=>tt(cur().k==='sms'?'Forward the text to 7726 (SPAM) so your carrier can block it.':'Forward it to reportphishing@apwg.org');
+function clicked(){sheet(`<div class="sh"><div class="tag">DON’T PANIC</div><h2>If you already clicked</h2><p>1. Don’t enter any details. Close the page.</p><p>2. Change the password of any account mentioned and turn on 2-step verification.</p><p>3. Call your bank using the number on your card.</p><p>4. Watch your statements and report at reportfraud.ftc.gov.</p><button class="btn" onclick="X()">Got it</button></div>`)}
+function lc(u,p){const it=p?S.prac:cur();if(it.lvl==='safe'){const d=u.replace(/https?:\/\/(www\.)?/,'').split('/')[0];return sheet(`<div class="sh"><span class="chip" style="--c:#2ee59d">Link check</span><h2>${d}</h2><p class="mut">This matches the sender and the company’s real address. Looks safe.</p><button class="btn" onclick="X()">Got it</button></div>`)}
+S.pop=it;const L=LS[it.cat];sheet(`<div class="sh"><div class="tag">RED FLAG</div><h2>Hold on. Did you spot it?</h2><div class="q">${L.f}</div><p class="mut"><b>Remember:</b> ${L.r}</p><div class="two"><button class="btn" onclick="ans(0)">I missed it</button><button class="btn gh" onclick="ans(1)">I ignored it</button></div></div>`)}
+function ans(i){const p=S.pop;if(i===0){S.log.unshift({cat:p.cat,d:Date.now()});S.streak=0}else{S.spot++;S.streak++}save();sheet(`<div class="sh"><h2>${i?'Nice catch':'Logged, no shame'}</h2><p class="mut">${i?`You ignored a ${p.cat} scam. Streak: ${S.streak}.`:`Saved on this phone only. A 1-minute lesson helps you spot ${p.cat} next time.`}</p>${i?'':`<button class="btn" onclick="lesson('${p.cat}')">Start lesson</button>`}<button class="btn gh" onclick="X()">${i?'Done':'Not now'}</button></div>`)}
+function lesson(c){const L=LS[c];sheet(`<div class="sh"><div class="tag">LESSON</div><h2>${c}</h2>${L.tips.map((t,i)=>`<div class="row" style="padding:14px"><b style="color:var(--bl);flex:none">${i+1}</b><div>${t}</div></div>`).join('')}<button class="btn" onclick="quiz('${c}')">Take the quick quiz</button></div>`)}
+function quiz(c,p){const L=LS[c],d=p!=null;sheet(`<div class="sh"><div class="tag">QUICK QUIZ</div><div class="b th">${lk(L.q)}</div><b>What do you do?</b>${L.o.map((o,j)=>`<button class="opt ${d?(j===L.a?'ok':j===p?'no':''):''}" ${d?'':`onclick="pk('${c}',${j})"`}>${o}</button>`).join('')}${d?`<p><b>${p===L.a?'Correct. ':'Not quite. '}</b>${L.w}</p><button class="btn" onclick="X()">Done</button>`:''}</div>`)}
+function pk(c,i){if(i===LS[c].a&&!S.learned.includes(c)){S.learned.push(c);save()}quiz(c,i)}
+async function gem(p){if(!S.key)return null;try{const r=await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key='+S.key,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{parts:[{text:p}]}]})});return(await r.json()).candidates[0].content.parts[0].text.trim()}catch(e){return null}}
+async function prac(){const cn={};S.log.forEach(e=>cn[e.cat]=(cn[e.cat]||0)+1);const ks=Object.keys(LS),c=Object.keys(cn).sort((a,b)=>cn[b]-cn[a])[0]||ks[Math.random()*ks.length|0];sheet(`<div class="sh"><p class="mut">Writing a fresh practice text…</p></div>`);const g=await gem(`Write one fake scam text message (max 25 words) in the category "${c}". Use a fake link ending in .example. Output only the message.`);S.prac={cat:c,lvl:'scam'};sheet(`<div class="sh"><div class="tag">${g?'GEMINI-WRITTEN':'SAMPLE'} · ${c.toUpperCase()}</div><div class="b th">${lk(g||LS[c].q,1)}</div><p class="mut">Would you tap the link? Tap it to see.</p><button class="btn gh" onclick="X()">Skip</button></div>`)}
+function prog(){const m=S.log.length,t=S.spot+m,pc=t?Math.round(S.spot/t*100):100;return `<div class="h1">Scam-spotting score</div><div class="pd"><div class="pg"><div class="ring" style="--p:${pc}"><b>${pc}%</b><small>spotted</small></div><div class="st3"><div><b>${S.streak}</b>in a row</div><div><b>${S.spot}</b>spotted</div><div><b>${m}</b>missed</div></div></div><button class="btn" onclick="prac()">Practice a fresh scam</button><div class="sec">Your timeline</div>${m?`<div class="tlw">${S.log.map(e=>`<div class="ev"><i></i><div><b>${e.cat}</b><div class="mut sm">${ago(e.d)}</div></div><button class="pill" onclick="lesson('${e.cat}')">Lesson</button></div>`).join('')}</div>`:'<p class="mut">Nothing yet. Great start.</p>'}<div class="sec">What you’ve learned</div>${S.learned.length?`<div class="chips">${S.learned.map(c=>`<span>${c}</span>`).join('')}</div>`:'<p class="mut">Finish a quiz to add topics.</p>'}<p class="mut sm">Stored only on this phone.</p></div>`}
+function priv(){return `<div class="h1">Privacy</div><div class="pd">${tog('sms','Messages','msg','g')}${tog('mail','Mail','mail','b')}<div class="row" onclick="terms()"><b>Terms &amp; Conditions</b>›</div><div><p class="mut sm" style="margin-bottom:6px">Gemini API key (optional, kept on this phone)</p><input id="key" value="${S.key||''}" placeholder="Paste key" onchange="S.key=this.value;save()"></div><button class="btn gh" onclick="S.log=[];S.spot=0;S.streak=0;S.learned=[];save();tt('Data cleared');R(0)">Clear my data</button></div>`}
+const tabs=()=>[['msg','msg','Messages',S.sms],['mail','mail','Mail',S.mail],['prog','chart','Progress',1],['priv','lock','Privacy',1]].filter(x=>x[3]).map(x=>`<button class="${S.tab===x[0]?'on':''}" onclick="S.tab='${x[0]}';R()">${ic(x[1])}${x[2]}</button>`).join('');
+function terms(){sheet(`<div class="sh"><div class="tag">TRUST FIRST</div><h2>Terms &amp; Privacy</h2><div class="row"><div><b>You choose what we check.</b><div class="mut sm">Nothing is scanned unless you tap “Check”.</div></div></div><div class="row"><div><b>We hide your details first.</b><div class="mut sm">Phone numbers, names and account numbers are blanked out before analysis.</div></div></div><div class="row"><div><b>Nothing is stored.</b><div class="mut sm">Messages aren’t saved. Your score and history stay on this phone.</div></div></div><div class="row"><div><b>Honest confidence.</b><div class="mut sm">We say “Likely scam” or “Not sure”, never “100%”. We can be wrong.</div></div></div><p class="mut sm">This demo uses fake messages and synthetic data.</p><button class="btn" onclick="X()">Close</button></div>`)}
+function R(a=1){if(S.tab==='msg'&&!S.sms&&S.mail)S.tab='mail';if(S.tab==='mail'&&!S.mail&&S.sms)S.tab='msg';const s=$('#screen');s.innerHTML=V[S.sc]();if(a){s.style.animation='none';s.offsetHeight;s.style.animation=''}$('#tabs').innerHTML=S.sc==='app'&&!S.open?tabs():'';document.body.dataset.t=S.dark?'d':'l';$('#theme').innerHTML=ic(S.dark?'sun':'moon');const m=s.querySelector('.ms');if(m)m.scrollTop=1e5}
+R();
+</script>
+</body>
+</html>
