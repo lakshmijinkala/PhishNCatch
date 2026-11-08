@@ -31,7 +31,7 @@ Phish n’ Release looks like a real Messages app and Mail app, filled with a mi
 ## App flow
 
 <div align="center">
-  <img src="docs/app-flow.svg" alt="Phish n' Release app flow diagram" width="100%" />
+  <img src="assets/app-flow.svg" alt="Phish n' Release app flow diagram" width="100%" />
 </div>
 
 ## Run it
